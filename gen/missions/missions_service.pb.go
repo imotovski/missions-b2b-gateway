@@ -667,6 +667,62 @@ func (x *Pagination) GetItemsPerPage() int64 {
 	return 0
 }
 
+// Error is a message type for domain specific errors.
+type Error struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Type string `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
+	Code string `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
+}
+
+func (x *Error) Reset() {
+	*x = Error{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_missions_service_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Error) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Error) ProtoMessage() {}
+
+func (x *Error) ProtoReflect() protoreflect.Message {
+	mi := &file_missions_service_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Error.ProtoReflect.Descriptor instead.
+func (*Error) Descriptor() ([]byte, []int) {
+	return file_missions_service_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *Error) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *Error) GetCode() string {
+	if x != nil {
+		return x.Code
+	}
+	return ""
+}
+
 // Filters message contains possible filters for the listing of missions.
 type ListMissionsRequest_Filters struct {
 	state         protoimpl.MessageState
@@ -685,7 +741,7 @@ type ListMissionsRequest_Filters struct {
 func (x *ListMissionsRequest_Filters) Reset() {
 	*x = ListMissionsRequest_Filters{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_missions_service_proto_msgTypes[3]
+		mi := &file_missions_service_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -698,7 +754,7 @@ func (x *ListMissionsRequest_Filters) String() string {
 func (*ListMissionsRequest_Filters) ProtoMessage() {}
 
 func (x *ListMissionsRequest_Filters) ProtoReflect() protoreflect.Message {
-	mi := &file_missions_service_proto_msgTypes[3]
+	mi := &file_missions_service_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -786,7 +842,7 @@ type ListMissionsResponse_Mission struct {
 func (x *ListMissionsResponse_Mission) Reset() {
 	*x = ListMissionsResponse_Mission{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_missions_service_proto_msgTypes[4]
+		mi := &file_missions_service_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -799,7 +855,7 @@ func (x *ListMissionsResponse_Mission) String() string {
 func (*ListMissionsResponse_Mission) ProtoMessage() {}
 
 func (x *ListMissionsResponse_Mission) ProtoReflect() protoreflect.Message {
-	mi := &file_missions_service_proto_msgTypes[4]
+	mi := &file_missions_service_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1153,21 +1209,24 @@ var file_missions_service_proto_rawDesc = []byte{
 	0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x04, 0x70, 0x61, 0x67, 0x65, 0x12, 0x24,
 	0x0a, 0x0e, 0x69, 0x74, 0x65, 0x6d, 0x73, 0x5f, 0x70, 0x65, 0x72, 0x5f, 0x70, 0x61, 0x67, 0x65,
 	0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0c, 0x69, 0x74, 0x65, 0x6d, 0x73, 0x50, 0x65, 0x72,
-	0x50, 0x61, 0x67, 0x65, 0x32, 0x75, 0x0a, 0x0e, 0x4d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x53,
-	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x63, 0x0a, 0x0c, 0x4c, 0x69, 0x73, 0x74, 0x4d, 0x69,
-	0x73, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x1d, 0x2e, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e,
+	0x50, 0x61, 0x67, 0x65, 0x22, 0x2f, 0x0a, 0x05, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x12, 0x12, 0x0a,
+	0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x74, 0x79, 0x70,
+	0x65, 0x12, 0x12, 0x0a, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x04, 0x63, 0x6f, 0x64, 0x65, 0x32, 0x75, 0x0a, 0x0e, 0x4d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e,
+	0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x63, 0x0a, 0x0c, 0x4c, 0x69, 0x73, 0x74, 0x4d,
+	0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x1d, 0x2e, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f,
+	0x6e, 0x73, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x4d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1e, 0x2e, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e,
 	0x73, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x4d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65,
-	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1e, 0x2e, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x73,
-	0x2e, 0x4c, 0x69, 0x73, 0x74, 0x4d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x14, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x0e, 0x12, 0x0c, 0x2f,
-	0x76, 0x31, 0x2f, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x3a, 0x4c, 0x0a, 0x0e, 0x69,
-	0x6e, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x6c, 0x5f, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x12, 0x21, 0x2e,
-	0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e,
-	0x45, 0x6e, 0x75, 0x6d, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73,
-	0x18, 0xeb, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x6e, 0x61,
-	0x6c, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x88, 0x01, 0x01, 0x42, 0x15, 0x5a, 0x13, 0x67, 0x69, 0x74,
-	0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x73,
-	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x14, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x0e, 0x12, 0x0c,
+	0x2f, 0x76, 0x31, 0x2f, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x3a, 0x4c, 0x0a, 0x0e,
+	0x69, 0x6e, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x6c, 0x5f, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x12, 0x21,
+	0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66,
+	0x2e, 0x45, 0x6e, 0x75, 0x6d, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e,
+	0x73, 0x18, 0xeb, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x6e,
+	0x61, 0x6c, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x88, 0x01, 0x01, 0x42, 0x15, 0x5a, 0x13, 0x67, 0x69,
+	0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e,
+	0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1183,7 +1242,7 @@ func file_missions_service_proto_rawDescGZIP() []byte {
 }
 
 var file_missions_service_proto_enumTypes = make([]protoimpl.EnumInfo, 8)
-var file_missions_service_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_missions_service_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_missions_service_proto_goTypes = []interface{}{
 	(ListMissionsRequest_MissionScenarioType)(0),       // 0: missions.ListMissionsRequest.MissionScenarioType
 	(ListMissionsRequest_MissionOptInStrategyType)(0),  // 1: missions.ListMissionsRequest.MissionOptInStrategyType
@@ -1196,29 +1255,30 @@ var file_missions_service_proto_goTypes = []interface{}{
 	(*ListMissionsRequest)(nil),                        // 8: missions.ListMissionsRequest
 	(*ListMissionsResponse)(nil),                       // 9: missions.ListMissionsResponse
 	(*Pagination)(nil),                                 // 10: missions.Pagination
-	(*ListMissionsRequest_Filters)(nil),                // 11: missions.ListMissionsRequest.Filters
-	(*ListMissionsResponse_Mission)(nil),               // 12: missions.ListMissionsResponse.Mission
-	(*timestamppb.Timestamp)(nil),                      // 13: google.protobuf.Timestamp
-	(*descriptorpb.EnumValueOptions)(nil),              // 14: google.protobuf.EnumValueOptions
+	(*Error)(nil),                                      // 11: missions.Error
+	(*ListMissionsRequest_Filters)(nil),                // 12: missions.ListMissionsRequest.Filters
+	(*ListMissionsResponse_Mission)(nil),               // 13: missions.ListMissionsResponse.Mission
+	(*timestamppb.Timestamp)(nil),                      // 14: google.protobuf.Timestamp
+	(*descriptorpb.EnumValueOptions)(nil),              // 15: google.protobuf.EnumValueOptions
 }
 var file_missions_service_proto_depIdxs = []int32{
-	11, // 0: missions.ListMissionsRequest.filters:type_name -> missions.ListMissionsRequest.Filters
+	12, // 0: missions.ListMissionsRequest.filters:type_name -> missions.ListMissionsRequest.Filters
 	10, // 1: missions.ListMissionsRequest.pagination:type_name -> missions.Pagination
-	12, // 2: missions.ListMissionsResponse.missions:type_name -> missions.ListMissionsResponse.Mission
+	13, // 2: missions.ListMissionsResponse.missions:type_name -> missions.ListMissionsResponse.Mission
 	0,  // 3: missions.ListMissionsRequest.Filters.scenario_types:type_name -> missions.ListMissionsRequest.MissionScenarioType
 	1,  // 4: missions.ListMissionsRequest.Filters.opt_in_strategy_types:type_name -> missions.ListMissionsRequest.MissionOptInStrategyType
 	2,  // 5: missions.ListMissionsRequest.Filters.condition_types:type_name -> missions.ListMissionsRequest.MissionConditionType
 	3,  // 6: missions.ListMissionsRequest.Filters.statuses:type_name -> missions.ListMissionsRequest.MissionStatus
-	13, // 7: missions.ListMissionsRequest.Filters.active_from:type_name -> google.protobuf.Timestamp
-	13, // 8: missions.ListMissionsRequest.Filters.active_to:type_name -> google.protobuf.Timestamp
+	14, // 7: missions.ListMissionsRequest.Filters.active_from:type_name -> google.protobuf.Timestamp
+	14, // 8: missions.ListMissionsRequest.Filters.active_to:type_name -> google.protobuf.Timestamp
 	4,  // 9: missions.ListMissionsResponse.Mission.scenario_type:type_name -> missions.ListMissionsResponse.MissionScenarioType
 	7,  // 10: missions.ListMissionsResponse.Mission.status:type_name -> missions.ListMissionsResponse.MissionStatus
 	5,  // 11: missions.ListMissionsResponse.Mission.opt_in_strategy_type:type_name -> missions.ListMissionsResponse.MissionOptInStrategyType
 	6,  // 12: missions.ListMissionsResponse.Mission.condition_type:type_name -> missions.ListMissionsResponse.MissionConditionType
-	13, // 13: missions.ListMissionsResponse.Mission.active_from:type_name -> google.protobuf.Timestamp
-	13, // 14: missions.ListMissionsResponse.Mission.active_to:type_name -> google.protobuf.Timestamp
-	13, // 15: missions.ListMissionsResponse.Mission.created_at:type_name -> google.protobuf.Timestamp
-	14, // 16: missions.internal_value:extendee -> google.protobuf.EnumValueOptions
+	14, // 13: missions.ListMissionsResponse.Mission.active_from:type_name -> google.protobuf.Timestamp
+	14, // 14: missions.ListMissionsResponse.Mission.active_to:type_name -> google.protobuf.Timestamp
+	14, // 15: missions.ListMissionsResponse.Mission.created_at:type_name -> google.protobuf.Timestamp
+	15, // 16: missions.internal_value:extendee -> google.protobuf.EnumValueOptions
 	8,  // 17: missions.MissionService.ListMissions:input_type -> missions.ListMissionsRequest
 	9,  // 18: missions.MissionService.ListMissions:output_type -> missions.ListMissionsResponse
 	18, // [18:19] is the sub-list for method output_type
@@ -1271,7 +1331,7 @@ func file_missions_service_proto_init() {
 			}
 		}
 		file_missions_service_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListMissionsRequest_Filters); i {
+			switch v := v.(*Error); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1283,6 +1343,18 @@ func file_missions_service_proto_init() {
 			}
 		}
 		file_missions_service_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListMissionsRequest_Filters); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_missions_service_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ListMissionsResponse_Mission); i {
 			case 0:
 				return &v.state
@@ -1301,7 +1373,7 @@ func file_missions_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_missions_service_proto_rawDesc,
 			NumEnums:      8,
-			NumMessages:   5,
+			NumMessages:   6,
 			NumExtensions: 1,
 			NumServices:   1,
 		},

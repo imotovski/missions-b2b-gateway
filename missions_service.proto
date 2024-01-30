@@ -198,3 +198,9 @@ message Pagination {
   int64 page = 1;
   int64 items_per_page = 2;
 }
+
+// Error is a message type for domain specific errors.
+message Error {
+  string type = 1;
+  string code = 2;
+}
