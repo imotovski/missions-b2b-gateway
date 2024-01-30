@@ -6,10 +6,10 @@ import (
 	"flag"
 	"fmt"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
+	"github.com/imotovski/missions-b2b-gateway/gen/missions"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/grpclog"
-	"missions-b2b-gateway/gen/missions"
 	"net/http"
 )
 
