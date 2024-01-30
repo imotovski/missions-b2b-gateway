@@ -10,6 +10,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/grpclog"
+	"log"
 	"net/http"
 )
 
@@ -20,7 +21,7 @@ type ServerError struct {
 var (
 	// command-line options:
 	// gRPC server endpoint
-	grpcServerEndpoint = flag.String("grpc-server-endpoint", "localhost:9090", "gRPC server endpoint")
+	grpcServerEndpoint = flag.String("grpc-server-endpoint", "localhost:9493", "gRPC server endpoint")
 )
 
 func main() {
@@ -45,6 +46,8 @@ func run() error {
 	if err != nil {
 		return err
 	}
+
+	log.Println("serving on 8081")
 
 	// Start HTTP server (and proxy calls to gRPC server endpoint)
 	return http.ListenAndServe(":8081", authMiddleware(mux))

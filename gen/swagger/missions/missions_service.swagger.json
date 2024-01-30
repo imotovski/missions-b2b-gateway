@@ -1,0 +1,215 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "missions_service.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "MissionService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/missions": {
+      "get": {
+        "summary": "ListMissions is an endpoint for manually updating missions.",
+        "operationId": "MissionService_ListMissions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/missionsListMissionsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pagination.page",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pagination.itemsPerPage",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "MissionService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "ListMissionsResponseMission": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "internalName": {
+          "type": "string"
+        },
+        "scenarioType": {
+          "$ref": "#/definitions/ListMissionsResponseMissionScenarioType"
+        },
+        "status": {
+          "$ref": "#/definitions/ListMissionsResponseMissionStatus"
+        },
+        "optInStrategyType": {
+          "$ref": "#/definitions/ListMissionsResponseMissionOptInStrategyType"
+        },
+        "exposedToCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "conditionType": {
+          "$ref": "#/definitions/ListMissionsResponseMissionConditionType"
+        },
+        "optedInCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "timesCompleted": {
+          "type": "string",
+          "format": "int64"
+        },
+        "activeFrom": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "activeTo": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "description": "Mission represents mission entity."
+    },
+    "ListMissionsResponseMissionConditionType": {
+      "type": "string",
+      "enum": [
+        "MISSION_CONDITION_TYPE_UNSPECIFIED",
+        "MISSION_CONDITION_TYPE_SPORT",
+        "MISSION_CONDITION_TYPE_CASINO",
+        "MISSION_CONDITION_TYPE_DEPOSIT"
+      ],
+      "default": "MISSION_CONDITION_TYPE_UNSPECIFIED",
+      "description": "MissionConditionType is an enum for the different mission condition types.\n\n - MISSION_CONDITION_TYPE_UNSPECIFIED: MISSION_condition_TYPE_UNSPECIFIED is a zero value definition.\n - MISSION_CONDITION_TYPE_SPORT: MISSION_condition_TYPE_SPORT is sport condition type.\n - MISSION_CONDITION_TYPE_CASINO: MISSION_condition_TYPE_CASINO is casino condition type.\n - MISSION_CONDITION_TYPE_DEPOSIT: MISSION_condition_TYPE_DEPOSIT is casino condition type."
+    },
+    "ListMissionsResponseMissionOptInStrategyType": {
+      "type": "string",
+      "enum": [
+        "MISSION_OPT_IN_STRATEGY_TYPE_UNSPECIFIED",
+        "MISSION_OPT_IN_STRATEGY_TYPE_MANUAL",
+        "MISSION_OPT_IN_STRATEGY_TYPE_AUTOMATIC"
+      ],
+      "default": "MISSION_OPT_IN_STRATEGY_TYPE_UNSPECIFIED",
+      "description": "OptInStrategyType is an enum for the different mission opt-in strategies.\n\n - MISSION_OPT_IN_STRATEGY_TYPE_UNSPECIFIED: MISSION_OPT_IN_STRATEGY_TYPE_UNSPECIFIED is zero value definition.\n - MISSION_OPT_IN_STRATEGY_TYPE_MANUAL: MISSION_OPT_IN_STRATEGY_TYPE_MANUAL indicates a manual opt-in strategy.\n - MISSION_OPT_IN_STRATEGY_TYPE_AUTOMATIC: MISSION_OPT_IN_STRATEGY_TYPE_AUTOMATIC indicates automatic strategy."
+    },
+    "ListMissionsResponseMissionScenarioType": {
+      "type": "string",
+      "enum": [
+        "MISSION_SCENARIO_TYPE_UNSPECIFIED",
+        "MISSION_SCENARIO_TYPE_SINGLE_WAGER",
+        "MISSION_SCENARIO_TYPE_CUMULATIVE_WAGER",
+        "MISSION_SCENARIO_TYPE_SINGLE_PAYMENT",
+        "MISSION_SCENARIO_TYPE_CUMULATIVE_PAYMENT"
+      ],
+      "default": "MISSION_SCENARIO_TYPE_UNSPECIFIED",
+      "description": "MissionScenarioType represents the scenario type of a mission.\n\n - MISSION_SCENARIO_TYPE_UNSPECIFIED: MISSION_SCENARIO_TYPE_UNDEFINED is the zero value MissionScenarioType.\n - MISSION_SCENARIO_TYPE_SINGLE_WAGER: MISSION_SCENARIO_TYPE_SINGLE_WAGER represents a single wager mission scenario.\n - MISSION_SCENARIO_TYPE_CUMULATIVE_WAGER: MISSION_SCENARIO_TYPE_CUMULATIVE_WAGER represents a cumulative wager mission scenario.\n - MISSION_SCENARIO_TYPE_SINGLE_PAYMENT: MISSION_SCENARIO_TYPE_SINGLE_PAYMENT represents a single payment scenario type.\n - MISSION_SCENARIO_TYPE_CUMULATIVE_PAYMENT: MISSION_SCENARIO_TYPE_CUMULATIVE_PAYMENT represents a cumulative payment scenario type.",
+      "title": "Wager Type"
+    },
+    "ListMissionsResponseMissionStatus": {
+      "type": "string",
+      "enum": [
+        "MISSION_STATUS_UNSPECIFIED",
+        "MISSION_STATUS_ACTIVE",
+        "MISSION_STATUS_SCHEDULED",
+        "MISSION_STATUS_EXPIRED",
+        "MISSION_STATUS_ARCHIVED",
+        "MISSION_STATUS_DELETED"
+      ],
+      "default": "MISSION_STATUS_UNSPECIFIED",
+      "description": "MissionStatus mission status type.\n\n - MISSION_STATUS_UNSPECIFIED: MISSION_STATUS_UNSPECIFIED describes unspecified mission status.\n - MISSION_STATUS_ACTIVE: MISSION_STATUS_ACTIVE describes active mission status.\n - MISSION_STATUS_SCHEDULED: MISSION_STATUS_SCHEDULED describes scheduled mission status.\n - MISSION_STATUS_EXPIRED: MISSION_STATUS_EXPIRED describes expired mission status.\n - MISSION_STATUS_ARCHIVED: MISSION_STATUS_ARCHIVED describes archived mission status.\n - MISSION_STATUS_DELETED: MISSION_STATUS_DELETED describes deleted mission status."
+    },
+    "missionsListMissionsResponse": {
+      "type": "object",
+      "properties": {
+        "missions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ListMissionsResponseMission"
+          }
+        },
+        "totalCount": {
+          "type": "string",
+          "format": "int64"
+        }
+      },
+      "description": "ListMissionsResponse is a server response for listing missions."
+    },
+    "missionsPagination": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "string",
+          "format": "int64"
+        },
+        "itemsPerPage": {
+          "type": "string",
+          "format": "int64"
+        }
+      },
+      "description": "This is the pagination struct for each filter."
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}
