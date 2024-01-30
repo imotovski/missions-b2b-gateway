@@ -1,0 +1,200 @@
+syntax = "proto3";
+
+package missions;
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/descriptor.proto";
+
+option go_package = "github.com/missions";
+
+// MissionService is a service, responsible for mission operations.
+service MissionService {
+  // ListMissions is an endpoint for manually updating missions.
+  rpc ListMissions(ListMissionsRequest) returns (ListMissionsResponse) {
+    option (google.api.http) = {
+      get: "/v1/missions"
+    };
+  };
+}
+
+// ListMissionsRequest is a client request for listing missions.
+message ListMissionsRequest {
+  // Wager Type
+  //
+  // MissionScenarioType represents the scenario type of a mission.
+  enum MissionScenarioType {
+    // MISSION_SCENARIO_TYPE_UNDEFINED is the zero value MissionScenarioType.
+    MISSION_SCENARIO_TYPE_UNSPECIFIED = 0 [ (internal_value) = "UNDEFINED" ];
+
+    // MISSION_SCENARIO_TYPE_SINGLE_WAGER represents a single wager mission scenario.
+    MISSION_SCENARIO_TYPE_SINGLE_WAGER = 1 [ (internal_value) = "SINGLE_WAGER" ];
+
+    // MISSION_SCENARIO_TYPE_CUMULATIVE_WAGER represents a cumulative wager mission scenario.
+    MISSION_SCENARIO_TYPE_CUMULATIVE_WAGER = 2 [ (internal_value) = "CUMULATIVE_WAGER" ];
+
+    // MISSION_SCENARIO_TYPE_SINGLE_PAYMENT represents a single payment scenario type.
+    MISSION_SCENARIO_TYPE_SINGLE_PAYMENT = 3 [ (internal_value) = "SINGLE_PAYMENT" ];
+
+    // MISSION_SCENARIO_TYPE_CUMULATIVE_PAYMENT represents a cumulative payment scenario type.
+    MISSION_SCENARIO_TYPE_CUMULATIVE_PAYMENT = 4 [ (internal_value) = "CUMULATIVE_PAYMENT" ];
+  }
+
+  // OptInStrategyType is an enum for the different mission opt-in strategies.
+  enum MissionOptInStrategyType {
+    // MISSION_OPT_IN_STRATEGY_TYPE_UNSPECIFIED is zero value definition.
+    MISSION_OPT_IN_STRATEGY_TYPE_UNSPECIFIED = 0 [ (internal_value) = "UNDEFINED" ];
+    // MISSION_OPT_IN_STRATEGY_TYPE_MANUAL indicates a manual opt-in strategy.
+    MISSION_OPT_IN_STRATEGY_TYPE_MANUAL = 1      [ (internal_value) = "MANUAL" ];
+    // MISSION_OPT_IN_STRATEGY_TYPE_AUTOMATIC indicates automatic strategy.
+    MISSION_OPT_IN_STRATEGY_TYPE_AUTOMATIC = 2   [ (internal_value) = "AUTOMATIC" ];
+  }
+
+  // MissionConditionType is an enum for the different mission condition types.
+  enum MissionConditionType {
+    // MISSION_condition_TYPE_UNSPECIFIED is a zero value definition.
+    MISSION_CONDITION_TYPE_UNSPECIFIED = 0 [ (internal_value) = "UNDEFINED" ];
+
+    // MISSION_condition_TYPE_SPORT is sport condition type.
+    MISSION_CONDITION_TYPE_SPORT = 1 [ (internal_value) = "SPORT" ];
+
+    // MISSION_condition_TYPE_CASINO is casino condition type.
+    MISSION_CONDITION_TYPE_CASINO = 2 [ (internal_value) = "CASINO" ];
+
+    // MISSION_condition_TYPE_DEPOSIT is casino condition type.
+    MISSION_CONDITION_TYPE_DEPOSIT = 3 [ (internal_value) = "DEPOSIT" ];
+  }
+
+  // MissionStatus mission status type.
+  enum MissionStatus {
+    // MISSION_STATUS_UNSPECIFIED describes unspecified mission status.
+    MISSION_STATUS_UNSPECIFIED = 0 [ (internal_value) = "UNDEFINED" ];
+
+    // MISSION_STATUS_ACTIVE describes active mission status.
+    MISSION_STATUS_ACTIVE = 1 [ (internal_value) = "ACTIVE" ];
+
+    // MISSION_STATUS_SCHEDULED describes scheduled mission status.
+    MISSION_STATUS_SCHEDULED = 2 [ (internal_value) = "SCHEDULED" ];
+
+    // MISSION_STATUS_EXPIRED describes expired mission status.
+    MISSION_STATUS_EXPIRED = 3 [ (internal_value) = "EXPIRED" ];
+
+    // MISSION_STATUS_ARCHIVED describes archived mission status.
+    MISSION_STATUS_ARCHIVED = 4 [ (internal_value) = "ARCHIVED" ];
+
+    // MISSION_STATUS_DELETED describes deleted mission status.
+    MISSION_STATUS_DELETED = 5 [ (internal_value) = "DELETED" ];
+  }
+
+  // Filters message contains possible filters for the listing of missions.
+  message Filters {
+    string internal_name = 1;
+    repeated MissionScenarioType scenario_types = 2;
+    repeated MissionOptInStrategyType opt_in_strategy_types = 3;
+    repeated MissionConditionType condition_types = 4;
+    repeated MissionStatus statuses = 5;
+    google.protobuf.Timestamp active_from = 6;
+    google.protobuf.Timestamp active_to = 7;
+  }
+
+  Filters filters = 1;
+  Pagination pagination = 2;
+}
+
+// ListMissionsResponse is a server response for listing missions.
+message ListMissionsResponse {
+  // Wager Type
+  //
+  // MissionScenarioType represents the scenario type of a mission.
+  enum MissionScenarioType {
+    // MISSION_SCENARIO_TYPE_UNDEFINED is the zero value MissionScenarioType.
+    MISSION_SCENARIO_TYPE_UNSPECIFIED = 0 [ (internal_value) = "UNDEFINED" ];
+
+    // MISSION_SCENARIO_TYPE_SINGLE_WAGER represents a single wager mission scenario.
+    MISSION_SCENARIO_TYPE_SINGLE_WAGER = 1 [ (internal_value) = "SINGLE_WAGER" ];
+
+    // MISSION_SCENARIO_TYPE_CUMULATIVE_WAGER represents a cumulative wager mission scenario.
+    MISSION_SCENARIO_TYPE_CUMULATIVE_WAGER = 2 [ (internal_value) = "CUMULATIVE_WAGER" ];
+
+    // MISSION_SCENARIO_TYPE_SINGLE_PAYMENT represents a single payment scenario type.
+    MISSION_SCENARIO_TYPE_SINGLE_PAYMENT = 3 [ (internal_value) = "SINGLE_PAYMENT" ];
+
+    // MISSION_SCENARIO_TYPE_CUMULATIVE_PAYMENT represents a cumulative payment scenario type.
+    MISSION_SCENARIO_TYPE_CUMULATIVE_PAYMENT = 4 [ (internal_value) = "CUMULATIVE_PAYMENT" ];
+  }
+
+  // OptInStrategyType is an enum for the different mission opt-in strategies.
+  enum MissionOptInStrategyType {
+    // MISSION_OPT_IN_STRATEGY_TYPE_UNSPECIFIED is zero value definition.
+    MISSION_OPT_IN_STRATEGY_TYPE_UNSPECIFIED = 0 [ (internal_value) = "UNDEFINED" ];
+    // MISSION_OPT_IN_STRATEGY_TYPE_MANUAL indicates a manual opt-in strategy.
+    MISSION_OPT_IN_STRATEGY_TYPE_MANUAL = 1      [ (internal_value) = "MANUAL" ];
+    // MISSION_OPT_IN_STRATEGY_TYPE_AUTOMATIC indicates automatic strategy.
+    MISSION_OPT_IN_STRATEGY_TYPE_AUTOMATIC = 2   [ (internal_value) = "AUTOMATIC" ];
+  }
+
+  // MissionConditionType is an enum for the different mission condition types.
+  enum MissionConditionType {
+    // MISSION_condition_TYPE_UNSPECIFIED is a zero value definition.
+    MISSION_CONDITION_TYPE_UNSPECIFIED = 0 [ (internal_value) = "UNDEFINED" ];
+
+    // MISSION_condition_TYPE_SPORT is sport condition type.
+    MISSION_CONDITION_TYPE_SPORT = 1 [ (internal_value) = "SPORT" ];
+
+    // MISSION_condition_TYPE_CASINO is casino condition type.
+    MISSION_CONDITION_TYPE_CASINO = 2 [ (internal_value) = "CASINO" ];
+
+    // MISSION_condition_TYPE_DEPOSIT is casino condition type.
+    MISSION_CONDITION_TYPE_DEPOSIT = 3 [ (internal_value) = "DEPOSIT" ];
+  }
+
+  // MissionStatus mission status type.
+  enum MissionStatus {
+    // MISSION_STATUS_UNSPECIFIED describes unspecified mission status.
+    MISSION_STATUS_UNSPECIFIED = 0 [ (internal_value) = "UNDEFINED" ];
+
+    // MISSION_STATUS_ACTIVE describes active mission status.
+    MISSION_STATUS_ACTIVE = 1 [ (internal_value) = "ACTIVE" ];
+
+    // MISSION_STATUS_SCHEDULED describes scheduled mission status.
+    MISSION_STATUS_SCHEDULED = 2 [ (internal_value) = "SCHEDULED" ];
+
+    // MISSION_STATUS_EXPIRED describes expired mission status.
+    MISSION_STATUS_EXPIRED = 3 [ (internal_value) = "EXPIRED" ];
+
+    // MISSION_STATUS_ARCHIVED describes archived mission status.
+    MISSION_STATUS_ARCHIVED = 4 [ (internal_value) = "ARCHIVED" ];
+
+    // MISSION_STATUS_DELETED describes deleted mission status.
+    MISSION_STATUS_DELETED = 5 [ (internal_value) = "DELETED" ];
+  }
+
+  // Mission represents mission entity.
+  message Mission {
+    string id = 1;
+    string internal_name = 2;
+    MissionScenarioType scenario_type = 3;
+    MissionStatus status = 4;
+    MissionOptInStrategyType opt_in_strategy_type = 5;
+    int64 exposed_to_count = 6;
+    MissionConditionType condition_type = 7;
+    int64 opted_in_count = 8;
+    int64 times_completed = 9;
+    google.protobuf.Timestamp active_from = 10;
+    google.protobuf.Timestamp active_to = 11;
+    google.protobuf.Timestamp created_at = 12;
+  }
+
+  repeated Mission missions = 1;
+  int64 total_count = 2;
+}
+
+extend google.protobuf.EnumValueOptions {
+  optional string internal_value = 1003;
+}
+
+// This is the pagination struct for each filter.
+message Pagination {
+  int64 page = 1;
+  int64 items_per_page = 2;
+}
